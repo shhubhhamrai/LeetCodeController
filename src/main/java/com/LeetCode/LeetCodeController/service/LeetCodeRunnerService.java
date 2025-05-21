@@ -18,9 +18,9 @@ public class LeetCodeRunnerService {
     private static final String JAVA_CLASS_PATH = "src/main/java/com/LeetCode/LeetCodeController/exercises/";
     private static final String LEETCODE_URL = "https://leetcode.com/";
     private static final String IFRAME_XPATH = "//iframe[contains(@src,'/playground/UpwhGDg6/shared')]";
-    private static final String CODEMIRROR_CONTAINER = ".CodeMirror";
+    private static final String CODEMIRROR_CONTAINER = "//div[@id='app']";
     private static final String RUN_BUTTON_XPATH = "//button[contains(@class,'run-code-btn')]";
-    private static final String RESULT_XPATH = "//div[contains(@class,'result-base')]";
+    private static final String RESULT_XPATH = "//div[@id='output-console']";
 
     public String runCode(LeetCodeRequest request) {
         String code;
@@ -52,8 +52,8 @@ public class LeetCodeRunnerService {
             Thread.sleep(1000);
 
             // Ensure editor is ready
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(CODEMIRROR_CONTAINER)));
-            WebElement cm = driver.findElement(By.cssSelector(CODEMIRROR_CONTAINER));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(CODEMIRROR_CONTAINER)));
+            WebElement cm = driver.findElement(By.xpath(CODEMIRROR_CONTAINER));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", cm);
             Thread.sleep(1000);
 
